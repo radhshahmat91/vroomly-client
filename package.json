@@ -1,0 +1,52 @@
+{
+  "name": "vroomly-client",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Vroomly \u2014 peer-to-peer car rental marketplace (Next.js 16, BetterAuth, Tailwind v4, DaisyUI)",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fontsource-variable/figtree": "^5.3.0",
+    "@fontsource/barlow-condensed": "^5.3.0",
+    "@hookform/resolvers": "^5.9.2",
+    "@stripe/react-stripe-js": "^7.0.1",
+    "@stripe/stripe-js": "^10.2.1",
+    "@tanstack/react-query": "^5.105.3",
+    "axios": "^1.21.0",
+    "better-auth": "^1.7.15",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.4.0",
+    "lucide-react": "^1.67.0",
+    "mongodb": "^6.22.0",
+    "motion": "^12.43.0",
+    "next": "^16.4.4",
+    "next-themes": "^0.4.6",
+    "nodemailer": "^10.3.1",
+    "react": "^19.3.1",
+    "react-day-picker": "^9.14.0",
+    "react-dom": "^19.3.1",
+    "react-hook-form": "^7.91.0",
+    "recharts": "^3.10.1",
+    "socket.io-client": "^4.8.4",
+    "sonner": "^2.0.8",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.4",
+    "@types/google.maps": "^3.66.9",
+    "@types/node": "^26.6.6",
+    "@types/nodemailer": "^8.0.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "daisyui": "^5.7.50",
+    "tailwindcss": "^4.3.4",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  }
+}

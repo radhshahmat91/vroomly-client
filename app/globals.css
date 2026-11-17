@@ -1,0 +1,263 @@
+@import "tailwindcss";
+@import "react-day-picker/style.css";
+
+@plugin "daisyui" {
+  themes: false;
+  logs: false;
+}
+
+/* Vroomly takes its palette from the road: asphalt ink, lane-marking yellow and highway-sign green. */
+@plugin "daisyui/theme" {
+  name: "vroomly";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+  --color-base-100: #fbfbf8;
+  --color-base-200: #f1f2ec;
+  --color-base-300: #e0e3d9;
+  --color-base-content: #1b1f24;
+  --color-primary: #ffc21a;
+  --color-primary-content: #1b1f24;
+  --color-secondary: #0b6b4d;
+  --color-secondary-content: #ffffff;
+  --color-accent: #1d5fd1;
+  --color-accent-content: #ffffff;
+  --color-neutral: #1b1f24;
+  --color-neutral-content: #f4f5f0;
+  --color-info: #1d5fd1;
+  --color-info-content: #ffffff;
+  --color-success: #0b6b4d;
+  --color-success-content: #ffffff;
+  --color-warning: #e8890c;
+  --color-warning-content: #1b1f24;
+  --color-error: #d7362b;
+  --color-error-content: #ffffff;
+  --radius-selector: 0.5rem;
+  --radius-field: 0.75rem;
+  --radius-box: 1.25rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@plugin "daisyui/theme" {
+  name: "vroomly-dark";
+  default: false;
+  prefersdark: false;
+  color-scheme: dark;
+  --color-base-100: #13171c;
+  --color-base-200: #1a2027;
+  --color-base-300: #28303a;
+  --color-base-content: #eceef2;
+  --color-primary: #ffc21a;
+  --color-primary-content: #14171c;
+  --color-secondary: #2fb586;
+  --color-secondary-content: #06251b;
+  --color-accent: #6aa2ff;
+  --color-accent-content: #0a1a33;
+  --color-neutral: #0d1014;
+  --color-neutral-content: #eceef2;
+  --color-info: #6aa2ff;
+  --color-info-content: #0a1a33;
+  --color-success: #2fb586;
+  --color-success-content: #06251b;
+  --color-warning: #f5a524;
+  --color-warning-content: #1b1304;
+  --color-error: #ff6b5e;
+  --color-error-content: #2a0804;
+  --radius-selector: 0.5rem;
+  --radius-field: 0.75rem;
+  --radius-box: 1.25rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@custom-variant dark (&:where([data-theme="vroomly-dark"], [data-theme="vroomly-dark"] *));
+
+@theme inline {
+  --font-sans: "Figtree Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Barlow Condensed", "Arial Narrow", ui-sans-serif, system-ui, sans-serif;
+
+  --animate-marquee: marquee 50s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-shimmer: shimmer 1.8s linear infinite;
+  --animate-pulse-ring: pulse-ring 2.2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes shimmer {
+    from { background-position: 200% 0; }
+    to { background-position: -200% 0; }
+  }
+  @keyframes pulse-ring {
+    0% { transform: scale(0.8); opacity: 0.7; }
+    100% { transform: scale(2.2); opacity: 0; }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-base-100);
+    color: var(--color-base-content);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.005em;
+  }
+  ::selection {
+    background: var(--color-primary);
+    color: var(--color-primary-content);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 2px;
+  }
+  [data-theme="vroomly-dark"] :focus-visible {
+    outline-color: var(--color-primary);
+  }
+  img { max-width: 100%; }
+}
+
+@layer components {
+  /* Every button on the site is a pill so the home page and the dashboards feel like one product. */
+  .btn { --radius-field: 9999px; font-weight: 600; }
+  .btn-square, .btn-circle { --radius-field: 9999px; }
+  .btn.btn-primary { box-shadow: 0 1px 0 rgb(0 0 0 / 0.12); }
+
+  .container-x { margin-inline: auto; width: 100%; max-width: 80rem; padding-inline: 1rem; }
+  @media (min-width: 640px) { .container-x { padding-inline: 1.5rem; } }
+  @media (min-width: 1024px) { .container-x { padding-inline: 2rem; } }
+
+  /* One heading style for every section. */
+  .section-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+  }
+  .section-sub {
+    margin-top: 0.75rem;
+    max-width: 40rem;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: color-mix(in oklab, var(--color-base-content) 68%, transparent);
+  }
+  .page-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 3.4vw, 2.75rem);
+    line-height: 1.05;
+  }
+
+  .surface {
+    background: var(--color-base-100);
+    border: 1px solid var(--color-base-300);
+    border-radius: var(--radius-box);
+  }
+  .surface-muted {
+    background: var(--color-base-200);
+    border-radius: var(--radius-box);
+  }
+
+  .glass {
+    background: color-mix(in oklab, var(--color-base-100) 78%, transparent);
+    backdrop-filter: blur(14px) saturate(1.4);
+    -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  }
+
+  /* Lane-marking dashes — used where something is a journey or a sequence. */
+  .road-dashes {
+    background-image: repeating-linear-gradient(90deg, currentColor 0 18px, transparent 18px 34px);
+    height: 4px;
+    border-radius: 2px;
+  }
+  .road-dashes-v {
+    background-image: repeating-linear-gradient(180deg, currentColor 0 14px, transparent 14px 26px);
+    width: 3px;
+    border-radius: 2px;
+  }
+
+  .skeleton-shine {
+    background: linear-gradient(90deg, var(--color-base-200) 25%, var(--color-base-300) 37%, var(--color-base-200) 63%);
+    background-size: 400% 100%;
+    animation: shimmer 1.6s linear infinite;
+  }
+
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+}
+
+/* ─── Calendar (react-day-picker) in the Vroomly palette ─── */
+.rdp-root {
+  --rdp-accent-color: var(--color-secondary);
+  --rdp-accent-background-color: color-mix(in oklab, var(--color-primary) 32%, transparent);
+  --rdp-range_middle-background-color: color-mix(in oklab, var(--color-primary) 32%, transparent);
+  --rdp-range_middle-color: var(--color-base-content);
+  --rdp-range_start-color: var(--color-secondary-content);
+  --rdp-range_end-color: var(--color-secondary-content);
+  --rdp-range_start-date-background-color: var(--color-secondary);
+  --rdp-range_end-date-background-color: var(--color-secondary);
+  --rdp-today-color: var(--color-base-content);
+  --rdp-selected-border: 0;
+  --rdp-day-height: 2.75rem;
+  --rdp-day-width: 2.75rem;
+  --rdp-day_button-height: 2.625rem;
+  --rdp-day_button-width: 2.625rem;
+  --rdp-day_button-border-radius: 9999px;
+  --rdp-disabled-opacity: 0.35;
+  font-size: 0.9rem;
+}
+.rdp-root .rdp-today:not(.rdp-outside) .rdp-day_button {
+  font-weight: 800;
+  box-shadow: inset 0 0 0 1.5px var(--color-base-content);
+}
+.rdp-root .rdp-day_button { font-weight: 500; }
+.rdp-root .rdp-chevron { fill: var(--color-base-content); }
+.rdp-root .rdp-caption_label { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; }
+/* Days someone else has booked, or the host blocked: clearly crossed out, not just faded. */
+.rdp-root .rdp-unavailable:not(.rdp-selected) .rdp-day_button {
+  text-decoration: line-through;
+  color: color-mix(in oklab, var(--color-base-content) 45%, transparent);
+  background: repeating-linear-gradient(135deg, transparent 0 5px, color-mix(in oklab, var(--color-base-content) 8%, transparent) 5px 7px);
+}
+.rdp-root .rdp-unavailable.rdp-disabled { opacity: 1; }
+.rdp-root .rdp-day:not(.rdp-disabled):not(.rdp-selected) .rdp-day_button:hover {
+  background: color-mix(in oklab, var(--color-primary) 40%, transparent);
+}
+.rdp-root .rdp-blocked-own .rdp-day_button {
+  background: color-mix(in oklab, var(--color-warning) 28%, transparent);
+  color: var(--color-base-content);
+  font-weight: 700;
+}
+.rdp-root .rdp-booked-own .rdp-day_button {
+  background: color-mix(in oklab, var(--color-secondary) 24%, transparent);
+  color: var(--color-base-content);
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* Host availability manager: blocked and booked days stay readable even though they are not selectable. */
+.rdp-root .rdp-blocked-own.rdp-disabled,
+.rdp-root .rdp-booked-own.rdp-disabled { opacity: 1; }
