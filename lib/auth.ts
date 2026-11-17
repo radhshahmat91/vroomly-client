@@ -76,7 +76,14 @@ export const auth = betterAuth({
   session: { expiresIn: 60 * 60 * 24 * 7, updateAge: 60 * 60 * 24 },
 
   plugins: [
-    jwt({ jwt: { issuer: origin, audience: origin, expirationTime: "1h" } }),
+    jwt({
+      // The app fetches its JWT from /api/auth/token (lib/token.ts) and never reads the `set-auth-jwt` header.
+      // Without this, every successful /get-session also signs a JWT with the key stored in the `jwks` collection;
+      // if that key can't be read (e.g. BETTER_AUTH_SECRET differs from the one that created it), /get-session
+      // fails and a correctly logged-in user looks logged out.
+      disableSettingJwtHeader: true,
+      jwt: { issuer: origin, audience: origin, expirationTime: "1h" },
+    }),
     nextCookies(), // keep this last so server actions can set cookies
   ],
 });
