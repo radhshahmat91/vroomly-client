@@ -1,7 +1,8 @@
 # Vroomly — client
 
-**Live site:** https://vroomly.vercel.app  ← replace with your deployed URL
-**Server repo:** [radhshahmat91/vroomly-server](https://github.com/radhshahmat91/vroomly-server) — the Express API (deploy it to Render and put its URL in `NEXT_PUBLIC_API_URL`)
+**Live site:** https://vroomly-client.vercel.app/
+**Server repo:** https://github.com/radhshahmat91/vroomly-server
+the Express API : https://vroomly-server.onrender.com
 
 Vroomly is a peer-to-peer car rental marketplace. Renters search, book and pay for cars from local hosts; hosts list vehicles and manage requests and earnings; admins moderate the whole platform.
 
